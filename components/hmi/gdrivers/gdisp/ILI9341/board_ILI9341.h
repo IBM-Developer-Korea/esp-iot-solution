@@ -74,14 +74,6 @@ static GFXINLINE void write_cmddata(GDisplay *g, uint8_t cmd, uint32_t data)
     board_lcd_write_cmddata(cmd, data);
 }
 
-static GFXINLINE void blit_area(GDisplay *g)
-{
-    const uint16_t	*buffer;
-    buffer = (const uint16_t *)g->p.ptr;
-    buffer += g->p.y1 * g->p.x2 + g->p.x1;	// The buffer start position
-    board_lcd_blit_area(g->p.x, g->p.y, buffer, g->p.cx, g->p.cy);
-}
-
 static GFXINLINE void setreadmode(GDisplay *g)
 {
     (void) g;

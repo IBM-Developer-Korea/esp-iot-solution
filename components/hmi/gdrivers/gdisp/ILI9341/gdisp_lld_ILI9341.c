@@ -149,7 +149,10 @@ LLDSPEC void gdisp_lld_fill_area(GDisplay *g)
 LLDSPEC void gdisp_lld_blit_area (GDisplay *g)
 {
     set_viewport(g);
-    blit_area(g);
+    uint16_t	*buffer;
+    buffer = (uint16_t *)g->p.ptr;
+    buffer += g->p.y1 * g->p.x2 + g->p.x1;	// The buffer start position
+    board_lcd_blit_area(g->p.x, g->p.y, buffer, g->p.cx, g->p.cy);
 }
 #endif // GDISP_HARDWARE_BITFILLS
 

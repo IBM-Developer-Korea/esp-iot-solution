@@ -13,7 +13,6 @@
 // limitations under the License.
 #ifndef _IOT_LCD_H_
 #define _IOT_LCD_H_
-/*This is the Adafruit subclass graphics file*/
 
 #include "string.h"
 #include "stdio.h"
@@ -105,9 +104,8 @@ typedef struct {
 } lcd_dc_t;
 
 #ifdef __cplusplus
-#include "Adafruit_GFX.h"
 
-class CEspLcd: public Adafruit_GFX
+class CEspLcd
 {
 private:
     spi_device_handle_t spi_wr = NULL;
@@ -117,6 +115,9 @@ private:
     uint8_t m_dma_chan;
     uint16_t m_height;
     uint16_t m_width;
+    uint16_t _height; // Replace Adafruit_GFX
+    uint16_t _width; // Replace Adafruit_GFX
+    uint8_t rotation; // Replace Adafruit_GFX
     SemaphoreHandle_t spi_mux;
     gpio_num_t cmd_io = GPIO_NUM_MAX;
     lcd_dc_t dc;
