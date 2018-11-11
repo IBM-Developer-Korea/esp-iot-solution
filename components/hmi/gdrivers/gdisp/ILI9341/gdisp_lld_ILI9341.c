@@ -82,6 +82,13 @@ LLDSPEC bool_t gdisp_lld_init(GDisplay *g)
     return TRUE;
 }
 
+LLDSPEC void set_viewport(GDisplay *g)
+{
+    write_cmddata(g, ILI9341_COLADDRSET_REG, MAKEWORD( ((g->p.x) >> 8), (g->p.x) & 0xFF, ((g->p.x + g->p.cx - 1) >> 8), (g->p.x + g->p.cx - 1) & 0xFF));
+    write_cmddata(g, ILI9341_PAGEADDRSET_REG, MAKEWORD( ((g->p.y) >> 8), (g->p.y) & 0xFF, ((g->p.y + g->p.cy - 1) >> 8), (g->p.y + g->p.cy - 1) & 0xFF));
+    write_index (g, ILI9341_MEMORYWRITE_REG);
+}
+
 #if GDISP_HARDWARE_STREAM_WRITE
 LLDSPEC void gdisp_lld_write_start(GDisplay *g)
 {

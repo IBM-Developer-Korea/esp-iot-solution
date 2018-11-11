@@ -253,6 +253,6 @@ uint32_t lcd_get_id(spi_device_handle_t spi, lcd_dc_t *dc)
     esp_err_t ret = _lcd_spi_send(spi, &t);
     assert( ret == ESP_OK );
 
-    return t.rx_data[0] | (t.rx_data[1] << 8) | (t.rx_data[2] << 16) | (t.rx_data[3] << 24);
+    return MAKEWORD(t.rx_data[0], t.rx_data[1], t.rx_data[2], t.rx_data[3]);
 }
 
